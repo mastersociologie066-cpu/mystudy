@@ -4,10 +4,13 @@ const resultsContainer = document.getElementById("results");
 const searchForm = document.getElementById("searchForm");
 
 async function searchWikipedia(query) {
-    if (!query.trim()) {
+
+    query = query.trim();
+
+    if (!query) {
         resultsContainer.innerHTML = `
             <div class="empty-state">
-                اكتب كلمة أو سؤالًا للبحث.
+                ⚠️ اكتب كلمة أو موضوعًا للبحث.
             </div>
         `;
         return;
@@ -15,11 +18,12 @@ async function searchWikipedia(query) {
 
     resultsContainer.innerHTML = `
         <div class="loading">
-            🔎 جارٍ البحث...
+            🔎 جارٍ البحث عن: <strong>${query}</strong>...
         </div>
     `;
 
     try {
+
         const url =
             "https://ar.wikipedia.org/w/api.php" +
             "?action=query" +
@@ -37,74 +41,86 @@ async function searchWikipedia(query) {
         const response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error("حدث خطأ في الاتصال");
+            throw new Error("فشل الاتصال");
         }
 
         const data = await response.json();
 
+        resultsContainer.innerHTML = "";
+
         if (!data.query || !data.query.pages) {
+
             resultsContainer.innerHTML = `
                 <div class="empty-state">
-                    لم نجد نتائج لهذا البحث.
+                    😕 لم نجد نتائج لهذا البحث.
                 </div>
             `;
+
             return;
         }
 
         const pages = Object.values(data.query.pages);
 
-        resultsContainer.innerHTML = "";
-
         pages.forEach(page => {
-            const article = document.createElement("article");
-            article.className = "result-card";
+
+            const card = document.createElement("div");
+            card.className = "result-card";
 
             const title = document.createElement("h3");
             title.textContent = page.title;
 
             const description = document.createElement("p");
+
             description.textContent =
-                page.extract || "لا يوجد وصف متاح لهذا الموضوع.";
+                page.extract ||
+                "لا يوجد وصف متاح لهذا الموضوع.";
 
             const link = document.createElement("a");
+
             link.href =
                 page.fullurl ||
-                `https://ar.wikipedia.org/wiki/${encodeURIComponent(
-                    page.title
-                )}`;
+                `https://ar.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
+
             link.target = "_blank";
             link.rel = "noopener noreferrer";
-            link.textContent = "قراءة المقال ←";
 
-            article.appendChild(title);
-            article.appendChild(description);
-            article.appendChild(link);
+            link.textContent = "📖 قراءة المزيد";
 
-            resultsContainer.appendChild(article);
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(link);
+
+            resultsContainer.appendChild(card);
         });
 
     } catch (error) {
+
         console.error(error);
 
         resultsContainer.innerHTML = `
             <div class="error-state">
                 ❌ حدث خطأ أثناء البحث.
                 <br>
-                حاول مرة أخرى.
+                حاول مرة أخرى بعد قليل.
             </div>
         `;
     }
 }
 
-if (searchForm) {
-    searchForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        searchWikipedia(searchInput.value);
-    });
-}
 
-if (searchButton) {
-    searchButton.addEventListener("click", function() {
-        searchWikipedia(searchInput.value);
-    });
-}
+searchForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    searchWikipedia(searchInput.value);
+
+});
+
+
+searchButton.addEventListener("click", function(event) {
+
+    event.preventDefault();
+
+    searchWikipedia(searchInput.value);
+
+});
