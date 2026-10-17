@@ -1,176 +1,332 @@
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: #f5f3ff;
-    color: #222;
-    min-height: 100vh;
+    background: #f5f7fc;
+    color: #20243a;
+    line-height: 1.8;
 }
 
 .header {
-    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    background: linear-gradient(135deg, #312e81, #6d28d9, #9333ea);
     color: white;
     text-align: center;
-    padding: 35px 20px;
+    padding: 30px 15px;
 }
 
 .logo {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .header p {
     font-size: 17px;
 }
 
+.main-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 20px;
+}
+
+.main-nav a:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
 .container {
-    width: min(1000px, 92%);
-    margin: 0 auto;
+    width: min(1100px, 92%);
+    margin: auto;
 }
 
 .hero {
     text-align: center;
-    padding: 55px 15px 35px;
+    padding: 55px 10px 30px;
 }
 
 .hero h1 {
-    font-size: 38px;
-    margin-bottom: 15px;
+    font-size: clamp(28px, 5vw, 42px);
+    color: #312e81;
+    margin-bottom: 12px;
 }
 
 .hero p {
-    color: #666;
-    font-size: 18px;
-    margin-bottom: 30px;
+    color: #62677a;
+    margin-bottom: 25px;
 }
 
 .search-box {
     display: flex;
     max-width: 750px;
     margin: auto;
-    background: white;
     padding: 8px;
+    gap: 8px;
+    background: white;
     border-radius: 18px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 30px rgba(40, 30, 90, 0.12);
 }
 
 .search-box input {
     flex: 1;
+    min-width: 0;
     border: none;
     outline: none;
-    padding: 16px;
+    padding: 14px;
     font-size: 17px;
     direction: rtl;
+    background: transparent;
 }
 
-.search-box button {
+.search-box button,
+.primary-button {
     border: none;
-    border-radius: 13px;
-    padding: 0 25px;
+    border-radius: 12px;
+    padding: 13px 22px;
     background: #6d28d9;
     color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
 }
 
-.search-box button:hover {
+.search-box button:hover,
+.primary-button:hover {
     background: #4c1d95;
+    transform: translateY(-1px);
 }
 
-.results-section {
+.results-section,
+.quick-section,
+.learning-section {
     margin: 35px auto;
 }
 
 .results-section h2,
-.quick-section h2 {
-    margin-bottom: 20px;
+.quick-section h2,
+.learning-section h2 {
+    color: #312e81;
+    font-size: 27px;
+    margin-bottom: 10px;
 }
 
-.result-card {
+.learning-section > p {
+    color: #62677a;
+    margin-bottom: 22px;
+}
+
+.result-card,
+.empty-state,
+.loading,
+.error-state {
     background: white;
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 22px;
-    margin-bottom: 16px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    margin-top: 16px;
+    box-shadow: 0 5px 20px rgba(40, 30, 90, 0.07);
 }
 
 .result-card h3 {
     color: #5b21b6;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .result-card p {
-    line-height: 1.8;
-    color: #555;
+    color: #555b70;
+    line-height: 1.9;
 }
 
 .result-card a {
     display: inline-block;
-    margin-top: 14px;
+    margin-top: 12px;
     color: #6d28d9;
-    text-decoration: none;
     font-weight: bold;
+    text-decoration: none;
+}
+
+.result-card a:hover {
+    text-decoration: underline;
 }
 
 .empty-state,
 .loading,
 .error-state {
     text-align: center;
-    padding: 35px;
-    background: white;
-    border-radius: 18px;
-    margin-top: 20px;
-}
-
-.quick-section {
-    margin: 40px auto;
 }
 
 .quick-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 18px;
 }
 
 .quick-buttons button {
-    border: none;
+    border: 1px solid #e3dcfa;
     background: white;
-    padding: 13px 20px;
+    color: #4c1d95;
+    padding: 12px 20px;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     font-size: 15px;
+    transition: 0.2s;
 }
 
 .quick-buttons button:hover {
+    background: #ede9fe;
     transform: translateY(-2px);
 }
 
+.lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 22px;
+}
+
+.lesson-card {
+    background: white;
+    border: 1px solid #ebe8f5;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 7px 24px rgba(40, 30, 90, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(40, 30, 90, 0.12);
+}
+
+.lesson-icon {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.lesson-card h3 {
+    color: #5b21b6;
+    margin-bottom: 12px;
+}
+
+.lesson-card p {
+    margin-bottom: 12px;
+    color: #555b70;
+}
+
+.lesson-card a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #6d28d9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.lesson-card a:hover {
+    text-decoration: underline;
+}
+
+#quizForm {
+    display: grid;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.question-card {
+    background: white;
+    border: 1px solid #ebe8f5;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 5px 18px rgba(40, 30, 90, 0.05);
+}
+
+.question-card h3 {
+    margin-bottom: 14px;
+    color: #312e81;
+}
+
+.question-card label {
+    display: block;
+    padding: 9px 12px;
+    margin: 7px 0;
+    background: #f8f7ff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.question-card label:hover {
+    background: #ede9fe;
+}
+
+.question-card input {
+    margin-left: 8px;
+    accent-color: #6d28d9;
+}
+
+#quizResult {
+    margin-top: 20px;
+}
+
 footer {
-    margin-top: 60px;
-    padding: 25px;
+    margin-top: 65px;
+    padding: 28px 15px;
     text-align: center;
     background: #241044;
     color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
+    .lesson-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
 
-    .hero h1 {
-        font-size: 28px;
+@media (max-width: 560px) {
+    .logo {
+        font-size: 29px;
+    }
+
+    .hero {
+        padding-top: 35px;
     }
 
     .search-box {
         flex-direction: column;
-        gap: 8px;
     }
 
     .search-box button {
-        padding: 14px;
+        width: 100%;
+    }
+
+    .lesson-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-card,
+    .question-card {
+        padding: 18px;
+    }
+
+    .results-section h2,
+    .quick-section h2,
+    .learning-section h2 {
+        font-size: 23px;
     }
 }
