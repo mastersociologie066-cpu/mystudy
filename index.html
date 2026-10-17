@@ -1,118 +1,142 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MyStudy - محرك البحث التعليمي</title>
-
+    <title>MyStudy - منصة التعلم</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header class="header">
-        <div class="logo">
-            📚 MyStudy
+<header class="header">
+    <div class="logo">📚 MyStudy</div>
+    <p>ابحث، تعلّم، واختبر معلوماتك</p>
+    <nav class="main-nav">
+        <a href="#search">البحث</a>
+        <a href="#lessons">الدروس</a>
+        <a href="#exercises">التمارين</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="hero" id="search">
+        <h1>مرحبًا بك في MyStudy</h1>
+        <p>منصتك للبحث والتعلم والمراجعة بطريقة سهلة.</p>
+
+        <form id="searchForm" class="search-box">
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="ماذا تريد أن تتعلم؟"
+                autocomplete="off"
+            >
+            <button id="searchButton" type="submit">🔎 بحث</button>
+        </form>
+    </section>
+
+    <section class="results-section">
+        <h2>نتائج البحث</h2>
+        <div id="results">
+            <div class="empty-state">
+                اكتب موضوعًا في مربع البحث للبدء.
+            </div>
         </div>
+    </section>
 
-        <p>
-            محرك بحثك التعليمي الذكي
-        </p>
-    </header>
+    <section class="quick-section">
+        <h2>بحث سريع</h2>
+        <div class="quick-buttons">
+            <button type="button" onclick="searchWikipedia('الرياضيات')">📐 الرياضيات</button>
+            <button type="button" onclick="searchWikipedia('اللغة الفرنسية')">🇫🇷 الفرنسية</button>
+            <button type="button" onclick="searchWikipedia('العلوم')">🔬 العلوم</button>
+            <button type="button" onclick="searchWikipedia('التاريخ')">📖 التاريخ</button>
+        </div>
+    </section>
 
+    <section id="lessons" class="learning-section">
+        <h2>📚 مكتبة الدروس</h2>
+        <p>ابدأ بدرس قصير، ثم انتقل إلى التمارين.</p>
 
-    <main class="container">
+        <div class="lesson-grid">
 
-        <section class="hero">
+            <article class="lesson-card">
+                <div class="lesson-icon">📐</div>
+                <h3>الرياضيات: الكسور</h3>
+                <p>الكسر يعبّر عن جزء من كل. يتكون من بسط ومقام، مثل 3/4.</p>
+                <p><strong>مثال:</strong> إذا قُسّمت فطيرة إلى 4 أجزاء متساوية وأخذنا 3، فإننا أخذنا 3/4.</p>
+                <a href="#exercises">جرّب التمارين ←</a>
+            </article>
 
-            <h1>
-                ابحث وتعلّم مع MyStudy
-            </h1>
+            <article class="lesson-card">
+                <div class="lesson-icon">🇫🇷</div>
+                <h3>الفرنسية: être و avoir</h3>
+                <p><strong>Être</strong> تعني يكون، و<strong>avoir</strong> تعني يملك أو لديه.</p>
+                <p><strong>أمثلة:</strong><br>
+                Je suis élève. — أنا تلميذ.<br>
+                J'ai un livre. — لدي كتاب.</p>
+                <a href="#exercises">جرّب التمارين ←</a>
+            </article>
 
-            <p>
-                ابحث عن المعلومات والدروس والمواضيع التعليمية بسهولة.
-            </p>
+            <article class="lesson-card">
+                <div class="lesson-icon">🔬</div>
+                <h3>العلوم: الماء</h3>
+                <p>يوجد الماء في الطبيعة في ثلاث حالات: صلبة وسائلة وغازية.</p>
+                <p><strong>أمثلة:</strong><br>
+                الثلج: صلب.<br>
+                ماء النهر: سائل.<br>
+                بخار الماء: غاز.</p>
+                <a href="#exercises">جرّب التمارين ←</a>
+            </article>
 
+        </div>
+    </section>
 
-            <form id="searchForm" class="search-box">
+    <section id="exercises" class="learning-section">
+        <h2>✏️ اختبر معلوماتك</h2>
+        <p>اختر إجابة واحدة لكل سؤال، ثم اضغط على زر التصحيح.</p>
 
-                <input
-                    id="searchInput"
-                    type="search"
-                    placeholder="ماذا تريد أن تتعلم؟"
-                    autocomplete="off"
-                >
+        <form id="quizForm">
 
-                <button
-                    id="searchButton"
-                    type="submit">
-                    🔎 بحث
-                </button>
-
-            </form>
-
-        </section>
-
-
-        <section class="results-section">
-
-            <h2>
-                نتائج البحث
-            </h2>
-
-            <div id="results">
-
-                <div class="empty-state">
-                    اكتب موضوعًا في مربع البحث للبدء.
-                </div>
-
+            <div class="question-card">
+                <h3>1. ما الكسر الذي يمثل ثلاثة أجزاء من أربعة أجزاء متساوية؟</h3>
+                <label><input type="radio" name="q1" value="a"> 1/4</label>
+                <label><input type="radio" name="q1" value="b"> 3/4</label>
+                <label><input type="radio" name="q1" value="c"> 4/3</label>
             </div>
 
-        </section>
-
-
-        <section class="quick-section">
-
-            <h2>
-                بحث سريع
-            </h2>
-
-            <div class="quick-buttons">
-
-                <button onclick="searchWikipedia('الرياضيات')">
-                    📐 الرياضيات
-                </button>
-
-                <button onclick="searchWikipedia('اللغة الفرنسية')">
-                    🇫🇷 الفرنسية
-                </button>
-
-                <button onclick="searchWikipedia('العلوم')">
-                    🔬 العلوم
-                </button>
-
-                <button onclick="searchWikipedia('التاريخ')">
-                    📖 التاريخ
-                </button>
-
+            <div class="question-card">
+                <h3>2. أكمل الجملة: Je ___ élève.</h3>
+                <label><input type="radio" name="q2" value="a"> suis</label>
+                <label><input type="radio" name="q2" value="b"> as</label>
+                <label><input type="radio" name="q2" value="c"> sommes</label>
             </div>
 
-        </section>
+            <div class="question-card">
+                <h3>3. ما حالة الماء في شكل الثلج؟</h3>
+                <label><input type="radio" name="q3" value="a"> سائلة</label>
+                <label><input type="radio" name="q3" value="b"> غازية</label>
+                <label><input type="radio" name="q3" value="c"> صلبة</label>
+            </div>
 
-    </main>
+            <button type="submit" class="primary-button">
+                ✅ تصحيح الإجابات
+            </button>
 
+        </form>
 
-    <footer>
+        <div id="quizResult" class="empty-state" aria-live="polite">
+            ستظهر نتيجتك هنا بعد التصحيح.
+        </div>
+    </section>
 
-        <p>
-            © 2026 MyStudy — منصة تعليمية
-        </p>
+</main>
 
-    </footer>
+<footer>
+    <p>© 2026 MyStudy — تعلّم شيئًا جديدًا كل يوم</p>
+</footer>
 
-
-    <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
